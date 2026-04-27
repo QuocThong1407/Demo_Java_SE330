@@ -13,5 +13,12 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  adminer:
+    image: adminer
+    container_name: adminer-web
+    restart: always
+    ports:
+      - "8081:8080"
+
 volumes:
   postgres_data:
