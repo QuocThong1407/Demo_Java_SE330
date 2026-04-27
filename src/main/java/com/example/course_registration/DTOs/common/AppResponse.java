@@ -10,7 +10,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL) 
-public class ApiResponse<T> {
+@Schema(name = "AppResponse", description = "Standard API response wrapper")
+public class AppResponse<T> {
     private int status;
     private String message;
 
