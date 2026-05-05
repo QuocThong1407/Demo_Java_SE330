@@ -31,7 +31,7 @@ public class StudentDataSeed implements CommandLineRunner {
                 .phone("+84912345678")
                 .major("Computer Science")
                 .academicYear(1)
-                .totalCredits(0)
+                .totalCredits(24)
                 .build();
         
         Student student2 = Student.builder()
@@ -41,7 +41,7 @@ public class StudentDataSeed implements CommandLineRunner {
                 .phone("+84912345679")
                 .major("Information Technology")
                 .academicYear(2)
-                .totalCredits(12)
+                .totalCredits(18)
                 .build();
         
         Student student3 = Student.builder()
@@ -51,7 +51,7 @@ public class StudentDataSeed implements CommandLineRunner {
                 .phone("+84912345680")
                 .major("Computer Science")
                 .academicYear(3)
-                .totalCredits(36)
+                .totalCredits(18)
                 .build();
         
         Student student4 = Student.builder()
@@ -61,7 +61,7 @@ public class StudentDataSeed implements CommandLineRunner {
                 .phone("+84912345681")
                 .major("Information Technology")
                 .academicYear(4)
-                .totalCredits(48)
+                .totalCredits(22)
                 .build();
         
         Student student5 = Student.builder()
@@ -91,7 +91,7 @@ public class StudentDataSeed implements CommandLineRunner {
                 .phone("+84912345684")
                 .major("Software Engineering")
                 .academicYear(3)
-                .totalCredits(42)
+                .totalCredits(22)
                 .build();
         
         Student student8 = Student.builder()

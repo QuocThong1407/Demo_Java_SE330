@@ -23,39 +23,26 @@ CREATE TABLE IF NOT EXISTS courses (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create course_sections table
+-- Create course_sections table with integrated scheduling and prerequisites
 CREATE TABLE IF NOT EXISTS course_sections (
     id BIGSERIAL PRIMARY KEY,
     course_id BIGINT NOT NULL,
     section_code VARCHAR(20) NOT NULL,
     max_slots INT NOT NULL,
     current_slots INT DEFAULT 0,
-    semester VARCHAR(20),
-    year INT,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    UNIQUE (course_id, section_code)
-);
-
--- Create course_schedules table
-CREATE TABLE IF NOT EXISTS course_schedules (
-    id BIGSERIAL PRIMARY KEY,
-    section_id BIGINT NOT NULL,
-    day_of_week VARCHAR(10) NOT NULL,
-    start_period INT NOT NULL,
-    end_period INT NOT NULL,
+    semester INT NOT NULL,
+    year INT NOT NULL,
+    day_of_week VARCHAR(10),
+    start_period INT,
+    end_period INT,
     room VARCHAR(50),
-    FOREIGN KEY (section_id) REFERENCES course_sections(id) ON DELETE CASCADE,
-    CHECK (start_period < end_period)
-);
-
--- Create course_prerequisites table
-CREATE TABLE IF NOT EXISTS course_prerequisites (
-    id BIGSERIAL PRIMARY KEY,
-    course_id BIGINT NOT NULL,
-    prerequisite_course_id BIGINT NOT NULL,
+    prerequisite_course_id BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    FOREIGN KEY (prerequisite_course_id) REFERENCES courses(id) ON DELETE CASCADE,
-    UNIQUE (course_id, prerequisite_course_id)
+    FOREIGN KEY (prerequisite_course_id) REFERENCES courses(id) ON DELETE SET NULL,
+    UNIQUE (course_id, section_code),
+    CHECK (start_period < end_period)
 );
 
 -- Create enrollments table

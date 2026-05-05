@@ -55,6 +55,25 @@ public class GlobalExceptionHandler {
     }
     
     /**
+     * Handle InvalidEnrollmentException
+     */
+    @ExceptionHandler(InvalidEnrollmentException.class)
+    public ResponseEntity<ErrorDetails> handleInvalidEnrollmentException(
+            InvalidEnrollmentException ex, WebRequest request) {
+        
+        log.error("Invalid enrollment: {}", ex.getMessage());
+        
+        ErrorDetails errorDetails = ErrorDetails.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(ex.getMessage())
+                .description(request.getDescription(false))
+                .timestamp(LocalDateTime.now())
+                .build();
+        
+        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+    
+    /**
      * Handle validation errors
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
